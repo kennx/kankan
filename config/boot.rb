@@ -21,10 +21,10 @@ end
 
 
 Mongoid.load!('./config/database.yml', :development)
-
-WeiboOAuth2::Config.api_key = '2114819521'
-WeiboOAuth2::Config.api_secret = '0a78c15afc77c027c45631beac88c9e8'
-WeiboOAuth2::Config.redirect_uri = 'http://test.kennx.net:4567/callback'
+WEIBO_CONFIG = YAML.load_file("./config/weibo.yml")
+WeiboOAuth2::Config.api_key = WEIBO_CONFIG['api_key']
+WeiboOAuth2::Config.api_secret = WEIBO_CONFIG['api_secret']
+WeiboOAuth2::Config.redirect_uri = WEIBO_CONFIG['redirect_uri']
 
 Dir.glob("./app/helpers/*.rb") {|file| require file}
 Dir.glob("./app/models/*.rb") {|file| require file}
