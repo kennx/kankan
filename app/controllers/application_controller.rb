@@ -16,7 +16,7 @@ class ApplicationController
       p token.validated?
       
       unless token.validated?
-        reset_session
+        clear_session
         redirect '/connect'
         return
       end
@@ -70,10 +70,7 @@ class ApplicationController
 
 
   get '/logout/?' do
-    session[:user_id] = nil
-    session[:uid] = nil
-    session[:access_token] = nil
-    session[:expires_at] = nil
+    clear_session
     redirect('/')
   end
 

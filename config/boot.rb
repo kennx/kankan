@@ -10,7 +10,6 @@ configure do
                              :path => '/',
                              :expire_after => nil, # In seconds
                              :secret => ''
-                             
   use Rack::Flash, :sweep => true
   set :root, File.expand_path(".")
   set :public_folder, settings.root + "/public"

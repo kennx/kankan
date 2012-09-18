@@ -5,7 +5,7 @@ module ApplicationHelper
       session[:user_id] = nil
       session[:uid] = nil
       session[:access_token] = nil
+      session[:expires_at] = nil
     end
   end
-
 end
