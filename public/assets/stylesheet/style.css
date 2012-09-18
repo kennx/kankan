@@ -1,0 +1,21 @@
+body {background:url("../images/red-bg.png");}
+button {cursor: pointer;}
+input:focus {outline:none}
+
+.header {height:50px;background:#fffdef url('../images/header-bg.png') repeat-x 0 0;padding:25px 2.618em 0 2.618em}
+.header h1 {padding:0;margin:0;background:url("../images/branding.png") no-repeat 0 0;height:32px;width:131px;overflow:hidden}
+.header h1 a {display:block;height:32px;width:131px;overflow:hidden;text-indent: -9999px}
+.wrapper {height:988px;background:#FFF url('../images/index-bg.jpg') no-repeat top center}
+.wrapper .words {padding:4.618em 2.618em 2.618em;font-family: serif;}
+.wrapper .words p {margin:0;padding:0;font-size:24px;color:#385fb2}
+
+.wrapper .plane {padding:0 2.618em}
+
+
+.register-btn {margin-bottom: 1.618em;}
+.register-btn a,
+.login-btn a {display:block;background:url("../images/weibo-btn.png") no-repeat 0 0;width:239px;height:48px;overflow:hidden;text-indent:-99999px;}
+
+
+.border {height:22px;background:transparent url('../images/border-bg.png') repeat-x 0 0}
+
