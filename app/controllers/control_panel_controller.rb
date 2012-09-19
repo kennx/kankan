@@ -7,10 +7,6 @@ class ControlPanelController < ApplicationController
     erb(:'photos/add')
   end
 
-  get '/cpanel/?' do
-    # GET
-  end
-
   get '/cpanel/edit_user/?' do
     # GET
   end

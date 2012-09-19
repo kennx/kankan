@@ -1,11 +1,13 @@
 class PhotoController < ApplicationController
 
-  get '/photo/explore/?' do
-    # GET
+  get '/photos/explore/?' do
+    @photos = Photo.all
+    erb(:'photos/explore')
   end
 
   get '/photo/:id/?' do
-    # GET
+    @photo = Photo.find(params[:id])
+    erb(:'photos/show')
   end
 
 end

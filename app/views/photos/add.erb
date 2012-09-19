@@ -1,3 +1,9 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:errors] %>
+  <p><%= flash[:errors] %></p>
+<% end %>
 <form action="/user/<%= @user.id %>/photo/create" method="post" class="form-horizontal" enctype="multipart/form-data">
   <div class="control-group">
     <label class="control-label" for="input-file">选择文件</label>
