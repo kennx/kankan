@@ -5,6 +5,7 @@ require 'yaml'
 require 'sinatra/reloader'
 
 configure do
+  set :protection, :except => :ip_spoofing
   use Rack::Session::Cookie, :key => 'kankan',
                              :domain => nil,
                              :path => '/',
@@ -18,6 +19,8 @@ configure do
   Moped.logger = Logger.new($stdout)
 end
 
+
+also_reload("./app/helpers/*.rb","./app/models/*.rb")
 
 Mongoid.load!('./config/database.yml', :development)
 WEIBO_CONFIG = YAML.load_file("./config/weibo.yml")

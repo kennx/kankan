@@ -1,8 +1,9 @@
-source 'https://rubygems.org'
+source :rubygems
 
 gem 'sinatra'
 gem 'mongoid'
 gem 'sinatra-reloader'
+gem 'thin'
 gem 'rack-flash3', :require => 'rack-flash'
 gem 'rack-cache', :require => 'rack/cache'
 gem 'mini_magick'

@@ -3,12 +3,18 @@
 module UploaderHelper
   helpers do
 
+    def dir_format_to_date
+      date = Time.now
+      date.strftime("%Y/%m/%d").to_s
+    end
 
-    def crop_image(file)
+
+    def crop_medium_image(file)
       image = MiniMagick::Image.new(file)
+      image_width,image_height = image[:width],image[:height]
       begin
-        if image[:width] > 600 || image[:height] > 600
-          image.strip # 删除Exif多余信息，压缩图片
+        if image_width.to_f > 600 || image_height.to_f > 600
+          image.strip
           image.resize("600x600")
         end
       rescue MiniMagick::Error
@@ -22,6 +28,20 @@ module UploaderHelper
       else
         image.path
       end
+    end
+
+    def crop_thumb_image(file)
+      image = MiniMagick::Image.new(file)
+      image_width,image_height = image[:width],image[:height]
+      if image_width > image_height
+        shaved = (image_width-image_height).abs / 2
+        image.shave("#{shaved}x0")
+      else
+        shaved = (image_height-image_width).abs / 2
+        image.shave("0x#{shaved}")
+      end
+      image.resize("300x200")
+      image.path
     end
 
   end

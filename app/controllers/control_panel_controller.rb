@@ -17,22 +17,30 @@ class ControlPanelController < ApplicationController
 
   post '/user/:id/photo/create/?' do
     @user = User.find(params[:id])
-    directory = "./public/uploads/photos/" + @user.id.to_s + "/"
+    NORMAL_DIR = "./public/uploader/attachment/" + dir_format_to_date + "/"
+    THUMB_DIR = "./public/uploader/attachment/" + dir_format_to_date + "/_thumb/"
     if params[:file] && (tmpfile = params[:file][:tempfile]) && (filename = params[:file][:filename])
       rename = "#{Time.now.to_i}" + File.extname(filename)
-      path = File.join(directory, rename)
-      `mkdir -p #{directory}` unless File.directory?(directory)
-      File.open(path, 'wb') do |f|
+      normal_path = File.join(NORMAL_DIR, rename)
+      thumb_path = File.join(THUMB_DIR, rename)
+      FileUtils.mkdir_p(NORMAL_DIR) unless File.directory?(NORMAL_DIR)
+      FileUtils.mkdir_p(THUMB_DIR) unless File.directory?(THUMB_DIR)
+      File.open(normal_path, "wb") do |f|
         f.write(tmpfile.read)
+        File.open(thumb_path, "wb") do |f2|
+          f2.write(File.open(normal_path).read)
+        end
       end
-      crop_image(path)
-      image_path = "/uploads/photos/" + @user.id.to_s + "/" + rename
-      if @user.photos.build(:middle => "#{image_path}", :statuse => params[:description]).save
-        flash[:notice] = "发布成功"
-        redirect back
-      else
-        flash[:error] = "发布失败"
-        redirect back
+      normal_url = "/uploader/attachment/" + dir_format_to_date + "/" + rename
+      thumbnail_url = "/uploader/attachment/" + dir_format_to_date + "/_thumb/" + rename
+      if crop_medium_image(normal_path) && crop_thumb_image(thumb_path)
+        if @user.photos.build(:photo_url => "#{normal_url}", :thumbnail_url => "#{thumbnail_url}", :statuse => params[:description]).save
+          flash[:notice] = "发布成功"
+          redirect back
+        else
+          flash[:errors] = "发布失败"
+          redirect back
+        end
       end
     end
   end
