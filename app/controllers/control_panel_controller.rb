@@ -32,6 +32,7 @@ class ControlPanelController < ApplicationController
       if crop_medium_image(normal_path) && crop_thumb_image(thumb_path)
         if @user.photos.build(:photo_url => "#{normal_url}", :thumbnail_url => "#{thumbnail_url}", :statuse => params[:description]).save
           flash[:notice] = "发布成功"
+          response['Cache-Control'] = "public, max-age=0"
           redirect back
         else
           flash[:errors] = "发布失败"

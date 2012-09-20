@@ -2,6 +2,7 @@
 require 'bundler'
 Bundler.require
 require 'yaml'
+require 'uuid'
 require 'sinatra/reloader'
 
 configure do
@@ -12,6 +13,7 @@ configure do
                              :expire_after => nil, # In seconds
                              :secret => ''
   use Rack::Flash, :sweep => true
+  use Rack::Cache
   set :root, File.expand_path(".")
   set :public_folder, settings.root + "/public"
   set :views, settings.root + "/app/views/"
