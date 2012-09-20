@@ -2,7 +2,6 @@
 require 'bundler'
 Bundler.require
 require 'yaml'
-require 'uuid'
 require 'sinatra/reloader'
 
 configure do

@@ -49,7 +49,39 @@ module UploaderHelper
         image.resize("200x200")
         image.path
       end
+    end
 
+    def crop_image_fixed_size(file, file_width, file_height)
+      begin
+        image = MiniMagick::Image.new(file)
+        original_width,original_height = image[:width],image[:height]
+        if original_width*file_height != original_height*file_width
+          if original_width*file_height >= original_height*file_width
+            original_height_clone = original_height
+            original_width_clone = original_height_clone * (file_width.to_f / file_height)
+          elsif original_width*file_height <= original_height * file_width
+            original_width_clone = original_width
+            original_height_clone = original_width_clone * (file_height.to_f / file_width)
+          end
+        else
+          original_height_clone = original_height
+          original_width_clone = original_width
+        end
+        if original_width_clone != original_width || original_height_clone != original_height
+          x = ((original_width - original_width_clone)/2).round
+          y = ((original_height - original_height_clone)/2).round
+          image.crop("#{original_width_clone}x#{original_height_clone}+#{x}+#{y}")
+        end
+      rescue MiniMagick::Error
+        flash[:errors] = "我的水平不高，这张图片可能我没办法处理，请换一张"
+        redirect back
+      rescue MiniMagick::Invalid
+        flash[:errors] = "你很坏，你上传的文件很可能不是一张图片！"
+        redirect back
+      else
+        image.resize("#{file_width}x#{file_height}")
+        return image
+      end
     end
 
   end

@@ -29,10 +29,9 @@ class ControlPanelController < ApplicationController
       end
       normal_url = "/uploader/attachment/" + dir_format_to_date + "/" + rename
       thumbnail_url = "/uploader/attachment/" + dir_format_to_date + "/_thumb/" + rename
-      if crop_medium_image(normal_path) && crop_thumb_image(thumb_path)
+      if crop_medium_image(normal_path) && crop_image_fixed_size(thumb_path, 320, 220)
         if @user.photos.build(:photo_url => "#{normal_url}", :thumbnail_url => "#{thumbnail_url}", :statuse => params[:description]).save
           flash[:notice] = "发布成功"
-          response['Cache-Control'] = "public, max-age=0"
           redirect back
         else
           flash[:errors] = "发布失败"

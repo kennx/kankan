@@ -2,6 +2,9 @@
 
 class ApplicationController
 
+  before do
+  end
+
   get '/' do
     client = WeiboOAuth2::Client.new
     if session[:access_token] && !client.authorized?
