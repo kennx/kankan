@@ -1,5 +1,5 @@
 <ul class="thumbnails">
   <% @photos.each do |photo| %>
-  <li><a href="/photo/<%= photo.id %>" class="thumbnail"><img src="<%= photo.thumbnail_url %>" alt=""></a></li>
+  <li><a href="/photo/<%= photo.id %>"><img src="<%= photo.thumbnail_url %>" alt=""></a></li>
   <% end %>
 </ul>

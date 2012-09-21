@@ -14,6 +14,8 @@ class Photo
   validates_length_of                     :statuse, :maximum => 120, :allow_blank => true, :message => "SORRY，只能输入120个字符"
   validates_presence_of                   :photo_url, :message => "你没有上传任何图片"
 
-  belongs_to                              :user, :inverse_of => :photos
+  belongs_to                              :user
 
+  has_and_belongs_to_many                 :tags
+  
 end
