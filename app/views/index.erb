@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>茉莉时间 - 不一样的微博相册</title>
+  <link rel="stylesheet" href="/assets/stylesheet/base.css" />
+  <link rel="stylesheet" href="/assets/stylesheet/style.css" />
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
+</head>
+<body>
+<div class="header">
+  <h1 class="branding">
+    <a href="/">茉莉时间</a>
+  </h1>
+</div>
+<div class="wrapper">
+  <div class="words">
+    <p><%= flash[:error] %></p>
+    <p><%= flash[:notice] %></p>
+    <p><%= session[:user_id] %></p>
+    <p>人生也许有太晚或者太迟的事情，<br />
+    但这并不重要，<br />
+    重要的是你一定有你想做的事情。<br />
+    而在喜欢和热爱面前，<br />
+    太晚或者太迟是那么微不足道。<br />
+    所以我去学习了程序语言，所以做了这个网站。</p>
+    <br />
+    <p>而你，要开始开始一段新的「旅程」吗？</p>
+  </div>
+  <div class="plane">
+    <div class="login-btn"><a href="/connect/" id="login">微博登陆</a></div>
+  </div>
+</div>
+<div class="border"></div>
+</body>
+</html>

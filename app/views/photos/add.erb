@@ -1,0 +1,29 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:errors] %>
+  <p><%= flash[:errors] %></p>
+<% end %>
+<form action="/user/<%= @user.id %>/photo/create" method="post" class="form-horizontal" enctype="multipart/form-data">
+  <div class="control-group">
+    <label class="control-label" for="input-file">选择文件</label>
+    <div class="controls">
+      <input type="file" name="file" id="input-file">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="input-description">文字说明</label>
+    <div class="controls">
+      <textarea name="description" rows="2" class="span7" id="input-description"></textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="input-tag">标签</label>
+    <div class="controls">
+      <input type="text" class="span5" name="tags" id="input-tag" />
+    </div>
+  </div>
+  <div class="controls">
+    <button type="submit" class="btn btn-primary">发布上传</button>
+  </div>
+</form>
